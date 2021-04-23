@@ -3,11 +3,12 @@ from Cell import Cell
 
 class GameOfLife:
 
-  def __init__(self,numberOfRows,numberOfColumns,matrix):
+  def __init__(self,numberOfRows,numberOfColumns,matrix,generation):
     self.numberOfRows=numberOfRows
     self.numberOfColumns=numberOfColumns
     self.matrix=[[]]
     self.numberOfGenerations=1
+    self.generation=generation
     for row in range(numberOfRows):
       for column in range(numberOfColumns):
         if matrix[row][column]==Cell.LIVING_CELL.value:
@@ -61,9 +62,11 @@ class GameOfLife:
       print('')
   
   def getGenerations(self):
+    count=1
     print("Generation: ", self.numberOfGenerations)
     self.printMatrix()
-    while self.createNewGeneration():
+    while self.createNewGeneration() and count<self.generation:
+      count+= 1 
       self.numberOfGenerations+=1
       print("Generation: ", self.numberOfGenerations)
       self.printMatrix()

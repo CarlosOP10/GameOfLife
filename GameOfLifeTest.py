@@ -7,19 +7,19 @@ class TestGameOfLife(unittest.TestCase):
 
   def setUp(self):
     self.gameValidateEnum=GameOfLife(2,2,[['.','*'],
-                                          ['*','.']])  
+                                          ['*','.']],3)  
 
     self.gameValidateCountNeighbours=GameOfLife(2,3,[['.','.','.'],
-                                                     ['*','.','*']])  
+                                                     ['*','.','*']],3)  
 
     self.gameValidateNeighbours=GameOfLife(4,8,[['.','.','.','.','.','.','.','.'],
                                                 ['.','.','.','.','*','.','.','.'],
                                                 ['.','.','.','*','*','.','.','.'],
-                                                ['.','.','.','.','.','.','.','.']])
+                                                ['.','.','.','.','.','.','.','.']],2)
 
     self.validateKillToReviveCell=GameOfLife(3,2,[['.','*'],
                                                   ['.','.'],
-                                                  ['*','.']])       
+                                                  ['*','.']],2)       
                                                        
   def testEnumDeadCellMatrix(self):
     self.assertEqual(self.gameValidateEnum.matrix[0][0],Cell.DEAD_CELL)
@@ -71,46 +71,46 @@ class TestGameOfLife(unittest.TestCase):
     game=GameOfLife(4,8,[['*','.','.','.','.','.','.','.'],
                          ['.','.','.','.','*','.','.','.'],
                          ['.','.','.','*','*','.','.','.'],
-                         ['.','.','.','.','.','.','.','.']])
+                         ['.','.','.','.','.','.','.','.']],2)
     self.assertEqual(game.createNewGeneration() , True)
   
   def testCreateNewGenerationFalse(self):
     game=GameOfLife(4,8,[['.','.','.','.','.','.','.','.'],
                          ['.','.','.','.','.','.','.','.'],
                          ['.','.','.','.','.','.','.','.'],
-                         ['.','.','.','.','.','.','.','.']])
+                         ['.','.','.','.','.','.','.','.']],4)
     self.assertEqual(game.createNewGeneration() , False)
 
   def testCreateNewGenerationNotEqual(self):
     game=GameOfLife(4,8,[['.','.','.','.','.','.','.','.'],
                          ['.','.','.','*','*','.','.','.'],
                          ['.','.','.','*','*','.','.','.'],
-                         ['.','.','.','.','.','.','.','.']])
+                         ['.','.','.','.','.','.','.','.']],3)
     self.assertNotEqual(game.createNewGeneration() , True)
 
   def testCreateNewGenerationEmpty(self):
-    game=GameOfLife(0,0,[[]])
+    game=GameOfLife(0,0,[[]],2)
     self.assertEqual(game.createNewGeneration() , False)
 
   def testGetGenerations(self):
     game=GameOfLife(4,8,[['.','*','.','.','.','.','.','*'],
                          ['.','.','.','.','*','.','.','.'],
                          ['.','.','.','*','*','.','.','.'],
-                         ['.','.','.','.','.','*','.','.']])
+                         ['.','.','.','.','.','*','.','.']],4)
     self.assertEqual(game.getGenerations(), 3)
 
   def testGetGenerations2(self):
     game=GameOfLife(4,8,[['.','.','.','.','.','.','.','.'],
                          ['.','.','.','.','*','.','.','.'],
                          ['.','.','.','*','*','.','.','.'],
-                         ['.','.','.','.','.','.','.','.']])
+                         ['.','.','.','.','.','.','.','.']],4)
     self.assertEqual(game.getGenerations(), 2)
 
   def testGetGenerations3(self):
     game=GameOfLife(4,8,[['.','.','.','.','.','.','.','.'],
                          ['.','.','.','.','.','.','.','.'],
                          ['.','.','.','.','.','.','.','.'],
-                         ['.','.','.','.','.','.','.','.']])
+                         ['.','.','.','.','.','.','.','.']],5)
     self.assertEqual(game.getGenerations(), 1)
   
 if __name__ == '__main__':
